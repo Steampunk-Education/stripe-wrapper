@@ -14,6 +14,10 @@ stripe.api_key = KEY
 
 app = FastAPI()
 
+@app.get("/")
+def ping():
+    return {"ping": "pong"}
+
 @app.get(f"/{VERSION}/link")
 async def getPaymentLink(hours: float = 0, rate: float = 0):
     if (hours*rate == 0):
