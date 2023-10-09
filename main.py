@@ -2,12 +2,13 @@ from fastapi import FastAPI, HTTPException
 import configparser
 import stripe
 import math
+import os
 
 config = configparser.ConfigParser()
 config.read("config.ini")
 VERSION = config.get("APP", "VERSION")
-KEY = config.get("STRIPE", "KEY")
-PRODUCT_ID = config.get("STRIPE", "PRODUCT_ID")
+KEY = os.environ.get("STRIPE_KEY", config.get("STRIPE", "KEY"))
+PRODUCT_ID = os.environ.get("STRIPE_PRODUCT_ID", config.get("STRIPE", "PRODUCT_ID"))
 
 stripe.api_key = KEY
 
