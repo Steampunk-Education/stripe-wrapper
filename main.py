@@ -10,9 +10,9 @@ VERSION = config.get("APP", "VERSION")
 KEY = os.environ.get("STRIPE_KEY", config.get("STRIPE", "KEY"))
 PRODUCT_ID = os.environ.get("STRIPE_PRODUCT_ID", config.get("STRIPE", "PRODUCT_ID"))
 
-stripe.api_key = KEY
-
 app = FastAPI()
+
+stripe.api_key = KEY
 
 @app.get("/")
 def ping():
