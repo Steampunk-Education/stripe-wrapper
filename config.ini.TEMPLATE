@@ -1,5 +1,4 @@
 [APP]
-DEBUG = False
 VERSION = v1
 
 [STRIPE]
