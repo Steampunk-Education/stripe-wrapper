@@ -19,9 +19,13 @@ def ping():
     return {"ping": "pong"}
 
 @app.get(f"/{VERSION}/link")
-async def getPaymentLink(hours: float = 0, rate: float = 0):
+async def getPaymentLink(hours, rate):
+    if (hours == None or rate == None):
+        raise HTTPException(status_code=401, detail="hours and rate are required parameters")
     if (hours*rate == 0):
         raise HTTPException(status_code=401, detail="hours AND rate must not equal zero.")
+    if (hours < 0 or rate < 0):
+        raise HTTPException(status_code=401, detail="hours and rate must be greater than zero")
     
     unit_amount = int(math.floor(hours*rate*100))
     priceResponse = stripe.Price.create(
