@@ -6,7 +6,7 @@ import os
 
 config = configparser.ConfigParser()
 config.read("config.ini")
-VERSION = config.get("APP", "VERSION")
+VERSION = os.environ.get("INVOICE_APP_VERSION", config.get("APP", "VERSION"))
 KEY = os.environ.get("STRIPE_KEY", config.get("STRIPE", "KEY"))
 PRODUCT_ID = os.environ.get("STRIPE_PRODUCT_ID", config.get("STRIPE", "PRODUCT_ID"))
 
