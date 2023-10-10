@@ -20,6 +20,8 @@ def ping():
 
 @app.get(f"/{VERSION}/link")
 async def getPaymentLink(hours, rate):
+    hours = float(hours)
+    rate = float(rate)
     if (hours == None or rate == None):
         raise HTTPException(status_code=401, detail="hours and rate are required parameters")
     if (hours*rate == 0):
