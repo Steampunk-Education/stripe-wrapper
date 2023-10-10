@@ -6,9 +6,9 @@ import os
 
 config = configparser.ConfigParser()
 config.read("config.ini")
-VERSION = os.environ.get("INVOICE_APP_VERSION", config.get("APP", "VERSION"))
-KEY = os.environ.get("STRIPE_KEY", config.get("STRIPE", "KEY"))
-PRODUCT_ID = os.environ.get("STRIPE_PRODUCT_ID", config.get("STRIPE", "PRODUCT_ID"))
+VERSION = os.environ.get("INVOICE_APP_VERSION")
+KEY = os.environ.get("STRIPE_KEY")
+PRODUCT_ID = os.environ.get("STRIPE_PRODUCT_ID")
 
 app = FastAPI()
 
