@@ -42,7 +42,8 @@ async def getPaymentLink(hours, rate):
                 "price": priceResponse["id"],
                 "quantity": 1,
             }
-        ]
+        ],
+        invoice_creation=dict(enabled=True)
     )
 
     return { "link": linkResponse["url"] }
