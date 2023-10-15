@@ -19,6 +19,11 @@ def ping():
     return {"ping": "pong"}
 
 @app.get(f"/{VERSION}/link")
+async def getPaymentLinkTotalAmount(totalAmount):
+    unit_amount = int(math.floor(float(totalAmount)*100))
+    return getLink(unit_amount=unit_amount)
+
+@app.get(f"/{VERSION}/calculatedlink")
 async def getPaymentLink(hours, rate):
     hours = float(hours)
     rate = float(rate)
@@ -30,6 +35,9 @@ async def getPaymentLink(hours, rate):
         raise HTTPException(status_code=401, detail="hours and rate must be greater than zero")
     
     unit_amount = int(math.floor(hours*rate*100))
+    return getLink(unit_amount=unit_amount)    
+
+def getLink(unit_amount):
     priceResponse = stripe.Price.create(
         unit_amount=unit_amount,
         currency="cad",
